@@ -23,8 +23,8 @@
         <div class="cap__wrapper">
             <div class="cap">
                 <div class="cap__left">
-                    <div class="cap__left-icon">
-                        <img class='btn-up' src="img/logo/logo.png" alt="">
+                    <div onclick="pageUp()" class="cap__left-icon">
+                        <img  src="img/logo/logo.png" alt="">
                     </div>
                     <div class="cap__left-info">
                         <div class="cap__left-info1">
@@ -38,16 +38,21 @@
                         Войти
                     </div>
                     <div class="cap__right-bucket">
-                        <div class="cap__rigth-bucket-wrapper">
+                        <div onclick="showBucket()" class="cap__rigth-bucket-wrapper">
                             <p class="cap__right-bucket-text">Корзина</p>
                             <p class="cap__right-bucket-text2">0</p>
                         </div>
-                        <div class="cap__bucket display-none">
-                            <div class=" cap__bucket-items-wrapper ">
-                                <div class="cap__bucket-items">
-                                    <div class="cap__bucket-items-inside-wrapper">
+                        <div class="cap__bucket-wrapper">
+                            <div class="cap__bucket display-none ">
+                                <div class=" cap__bucket-items-wrapper ">
+                                    <div class="cap__bucket-items">
+                                        <div class="cap__bucket-items-inside-wrapper">
+                                        </div>
+    
+                                        
                                     </div>
-
+                                </div>
+                                <div class="cap__bucket-bottom">
                                     <div class="cap__bucket-items-bottom">
                                         <div class="cap__bucket-items-sum-wrapp">
                                             Сумма заказа ........... <span class='cap__bucket-items-sum'
@@ -59,8 +64,8 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -149,197 +154,6 @@
                     Японская кухня
                 </div>
                 <div class="menu__carts">
-                    <div class="cart">
-                        <div class="cart__img">
-                            <img data-cart-img alt="">
-                        </div>
-                        <div data-cart-title class="cart__title">
-                        </div>
-                        <div class="cart__price">
-                            <div data-cart-price class="cart__price-number">
-
-                            </div>
-                            <div data-cart-btn class="cart__price-bucket">
-                                В корзину
-                            </div>
-                        </div>
-                    </div>
-                    <div  class="cart">
-                        <div class="cart__img">
-                            <img data-cart-img alt="">
-                        </div>
-                        <div data-cart-title class="cart__title">
-
-                        </div>
-                        <div class="cart__price">
-                            <div data-cart-price class="cart__price-number">
-
-                            </div>
-                            <div data-cart-btn class="cart__price-bucket">
-                                В корзину
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart">
-                        <div class="cart__img">
-                            <img data-cart-img alt="">
-                        </div>
-                        <div data-cart-title class=" cart__title">
-
-                        </div>
-                        <div class="cart__price">
-                            <div data-cart-price class="cart__price-number">
-
-                            </div>
-                            <div data-cart-btn  class="cart__price-bucket">
-                                В корзину
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart">
-                        <div class="cart__img img_kaguwase">
-                            <img data-cart-img alt="">
-                        </div>
-                        <div data-cart-title class="cart__title">
-
-                        </div>
-                        <div class="cart__price">
-                            <div data-cart-price class="cart__price-number">
-
-                            </div>
-                            <div data-cart-btn class="cart__price-bucket">
-                                В корзину
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart">
-                        <div class="cart__img">
-                            <img data-cart-img alt="">
-                        </div>
-                        <div data-cart-title class="cart__title">
-
-                        </div>
-                        <div class="cart__price">
-                            <div data-cart-price class="cart__price-number">
-
-                            </div>
-                            <div data-cart-btn class="cart__price-bucket">
-                                В корзину
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart">
-                        <div class="cart__img">
-                            <img data-cart-img alt="">
-                        </div>
-                        <div data-cart-title class="cart__title">
-
-                        </div>
-                        <div class="cart__price">
-                            <div data-cart-price class="cart__price-number">
-
-                            </div>
-                            <div data-cart-btn class="cart__price-bucket">
-                                В корзину
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart">
-                        <div class="cart__img">
-                            <img data-cart-img alt="">
-                        </div>
-                        <div data-cart-title class="cart__title">
-
-                        </div>
-                        <div class="cart__price">
-                            <div data-cart-price class="cart__price-number">
-
-                            </div>
-                            <div data-cart-btn class="cart__price-bucket">
-                                В корзину
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart">
-                        <div class="cart__img">
-                            <img data-cart-img alt="">
-                        </div>
-                        <div data-cart-title class="cart__title">
-
-                        </div>
-                        <div class="cart__price">
-                            <div data-cart-price class="cart__price-number">
-
-                            </div>
-                            <div data-cart-btn class="cart__price-bucket">
-                                В корзину
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart">
-                        <div class="cart__img">
-                            <img data-cart-img alt="">
-                        </div>
-                        <div data-cart-title class="cart__title">
-
-                        </div>
-                        <div class="cart__price">
-                            <div data-cart-price class="cart__price-number">
-
-                            </div>
-                            <div data-cart-btn class="cart__price-bucket">
-                                В корзину
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart">
-                        <div class="cart__img">
-                            <img data-cart-img alt="">
-                        </div>
-                        <div data-cart-title class="cart__title">
-
-                        </div>
-                        <div class="cart__price">
-                            <div data-cart-price class="cart__price-number">
-
-                            </div>
-                            <div data-cart-btn class="cart__price-bucket">
-                                В корзину
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart">
-                        <div class="cart__img">
-                            <img data-cart-img alt="">
-                        </div>
-                        <div data-cart-title class="cart__title">
-
-                        </div>
-                        <div class="cart__price">
-                            <div data-cart-price class="cart__price-number">
-
-                            </div>
-                            <div data-cart-btn class="cart__price-bucket">
-                                В корзину
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart">
-                        <div class="cart__img">
-                            <img data-cart-img alt="">
-                        </div>
-                        <div data-cart-title class="cart__title">
-
-                        </div>
-                        <div class="cart__price">
-                            <div data-cart-price class="cart__price-number">
-
-                            </div>
-                            <div data-cart-btn class="cart__price-bucket">
-                                В корзину
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
                 <div class="center__delivery">
@@ -407,10 +221,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/swiper.js"></script>
-
-    <script src='js/actionWithCart.js'></script>
-    <script src='js/showbucket.js'></script>
-    <script src='js/counter.js'></script>
     <script src='js/main.js'></script>
     <!-- <script>
         import {listrolls} from 'js/listrolls.js'
