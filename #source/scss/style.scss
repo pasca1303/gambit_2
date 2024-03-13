@@ -26,6 +26,10 @@ body {
 .display-none {
 	display: none !important;
 }
+.display-hidden {
+	display: none !important;
+	visibility: hidden;
+}
 .overflow-hidden{
 	overflow: hidden;
 }
@@ -175,21 +179,23 @@ body {
 	background-color: white;
 }
 .cap__bucket-wrapper{
+	
+	
+
 
 }
-.cap__bucket {
-	position: absolute;
+.cap__bucket {position: absolute;
+	top: 67px;
+	left: -190px;
 	width: 348px;
 	max-height: 500px;
 	background-color: white;
 	color: black;
-	z-index: 2;
+	z-index: 1;
 	border-radius: 8px;
-	top: 67px;
-	left: -190px;
-	padding: 12px;
-	box-shadow: 0px 4px 12px 2px #00000014;
-	overflow-y: scroll;
+	
+	padding: 0px 12px 0px 12px; 
+	// overflow-y: scroll;
 
 	&::-webkit-scrollbar {
 		width: 0;
@@ -207,15 +213,21 @@ body {
 	height: auto;
 	&-wrapper{
 		max-height: 500px;
+		overflow-y: scroll;
+	}
+	&-wrapper::-webkit-scrollbar{
+		display: none;
 	}
 }
 
 .cap__bucket-item {}
 
+
 .cap__bucket-item-wrapper {
+	z-index: 1;
 	width: 100%;
 	display: flex;
-	padding-bottom: 40px;
+	padding: 10px 0px 22px 0px; 
 	position: relative;
 }
 
@@ -246,7 +258,7 @@ body {
 
 .cap__bucket-trash {
 	position: absolute;
-	top: 0;
+	top: 20px;
 	right: 0;
 	padding: 0px 5px 0px 0px;
 	text-align: right;
@@ -272,6 +284,7 @@ body {
 	display: inline-block;
 
 }
+
 
 .cap__bucket-moreless {
 	display: flex;
@@ -326,15 +339,18 @@ body {
 }
 
 .cap__bucket-bottom {
-	position: absolute;
-	position: fixed;
-	bottom: 0;
-	padding-top: 20px;
+	position: sticky;
+	z-index: 3;
 	background-color: white;
+	
+	
+	display: flex;
+	justify-content: center;
 }
 
 
 .cap__bucket-prepay {
+	display: block;
 	color: white;
 	font-size: 16px;
 	border-radius: 12px;
@@ -522,15 +538,18 @@ body {
 .cart__price {
 	width: 100%;
 	position: absolute;
-	bottom: 0px;
+	bottom: 0;
+	display: flex;	
+	justify-content: space-between;
+	padding: 12px;
 }
 
 .cart__price-number {
 	font-weight: 700;
 	font-size: 18px;
-	position: absolute;
-	top: -30px;
-	left: 15px;
+	// position: absolute;
+	// top: -30px;
+	// left: 15px;
 }
 
 .cart__price-bucket {
@@ -549,7 +568,48 @@ body {
 	&:hover {
 		cursor: pointer;
 	}
+}
+.cart__price-counter{
+	// width: 100px;
 
+}
+.cart-moreless{
+	display: flex;
+}
+.cart__price-minus{
+	width: 30px;
+	height: 30px;
+	border: 1px solid #e3128f;
+	border-radius: 7px;
+	text-align: center;
+	color: #e3128f;
+	font-size: 24px;
+	cursor: pointer;
+	&:hover {
+		background-color: #e3128f;
+		color: white;
+	}
+}
+.cart__price-quantity{
+	
+	padding: 7px 15px 0px 15px;
+	font-weight: 600;
+	font-size: 17px;
+}
+.cart__price-plus{
+	width: 30px;
+	height: 30px;
+	border: 1px solid #e3128f;
+	border-radius: 7px;
+	text-align: center;
+	padding-top: 1px;
+	color: #e3128f;
+	font-size: 24px;
+	cursor: pointer;
+	&:hover {
+		background-color: #e3128f;
+		color: white;
+	}
 }
 
 .center__delivery {}

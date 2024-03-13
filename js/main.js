@@ -6,6 +6,7 @@ const cartMenu = document.querySelector(".menu__carts")
 function renderCarts() {
 	cartMenu.innerHTML = ""
 
+	//html карточки 
 	let cartaddeds = `<div class="cart">
 			<div class="cart__img">
 					<img data-cart-img alt="">
@@ -19,9 +20,19 @@ function renderCarts() {
 					<div data-cart-btn class="cart__price-bucket">
 							В корзину
 					</div>
+					
+					<div class="cart__price-counter display-none">
+							<div class="cart-moreless">
+									<div class="cart__price-minus" data-cart-btnMinus="btnMinus" onclick="delCounter()" >-
+									</div>
+									<div class="cart__price-quantity" data-cart-quantity ></div>
+									<div class="cart__price-plus" data-cart-btnPlus="btnPlus" onclick="console.log('Плюс')">+</div>
+							</div>
+					</div>
 			</div>
 		</div>`
 
+	//загружаем карточку на страницу 12 раз
 	for(let i = 0; i<12; i++){
 		cartMenu.insertAdjacentHTML("beforeend", cartaddeds)
 	}
@@ -140,12 +151,8 @@ listrolls.map((cart, index) => {
 			basket.push({ ...cart, counter: 1 })
 		}
 
-		//При клике показываем counter
-		// cartButton[index].classList.add("display-none")
+
 		
-
-
-
 		//Добавляем элемент в корзину
 		renderBasket()
 		//Изменяем сумма заказа в корзине
@@ -193,6 +200,9 @@ function renderBasket() {
 		</div>`
 
 		cartwrapper.insertAdjacentHTML("beforeend", cartaddeds)
+		
+		// console.log(product)
+	showCounter(product.id)
 	})
 }
 
@@ -302,7 +312,10 @@ function pageUp(){
 	})
 }
 //Функция показа counter для увелечения продуктов на карточке
-function showCounter(){
-
-}showCounter()
+function showCounter(idProduct){
+	let hhh = document.querySelectorAll(".cart__price-counter")
+	cartButton[idProduct - 1].classList.add("display-hidden")
+	hhh[idProduct -1].classList.remove("display-none")
+	
+}
 
