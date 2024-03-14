@@ -2,50 +2,6 @@
 //Переменная список продуктов куда мы добавляем карточки 
 const cartMenu = document.querySelector(".menu__carts")
 
-//Загружаем карточки ттоваров на страницу
-function renderCarts() {
-	cartMenu.innerHTML = ""
-
-	//html карточки 
-	let cartaddeds = `<div class="cart">
-			<div class="cart__img">
-					<img data-cart-img alt="">
-			</div>
-			<div data-cart-title class="cart__title">
-			</div>
-			<div class="cart__price">
-					<div data-cart-price class="cart__price-number">
-
-					</div>
-					<div data-cart-btn class="cart__price-bucket">
-							В корзину
-					</div>
-					
-					<div class="cart__price-counter display-none">
-							<div class="cart-moreless">
-									<div class="cart__price-minus" data-cart-btnMinus="btnMinus" onclick="delCounter()" >-
-									</div>
-									<div class="cart__price-quantity" data-cart-quantity ></div>
-									<div class="cart__price-plus" data-cart-btnPlus="btnPlus" onclick="console.log('Плюс')">+</div>
-							</div>
-					</div>
-			</div>
-		</div>`
-
-	//загружаем карточку на страницу 12 раз
-	for(let i = 0; i<12; i++){
-		cartMenu.insertAdjacentHTML("beforeend", cartaddeds)
-	}
-	
-	
-}renderCarts()
-
-
-// переменные для добавления информации продуктов на страницу
-const cartImg = document.querySelectorAll('[data-cart-img]')
-const cartTitle = document.querySelectorAll('[data-cart-title]')
-const cartPrice = document.querySelectorAll('[data-cart-Price]')
-const  cartButton = document.querySelectorAll('[data-cart-btn]')
 //Переменная корзина куда мы добавляем карточки
 const cartwrapper = document.querySelector(".cap__bucket-items-inside-wrapper")
 
@@ -130,29 +86,56 @@ let listrolls = [
 ]
 
 // Добавление инфы в карточки на странице и событие по кнопке на добавление элемента в корзину
-listrolls.map((cart, index) => {
-	//Добавление элементов на страницу
-	cartImg[index].setAttribute("src", cart.img),
-	cartTitle[index].innerHTML = cart.title,
-	cartPrice[index].innerHTML = cart.price
+listrolls.forEach((cart, index) => {
+	let cartaddeds = `<div id="${cart.id}"  class="cart">
+			<div class="cart__img">
+					<img src="${cart.img}" alt="">
+			</div>
+			<div  class="cart__title">
+				${cart.title}
+			</div>
+			<div class="cart__price">
+					<div  class="cart__price-number">
+						${cart.price}
+					</div>
+					<div id="${cart.id}" onclick="addCartItem(${cart.id})"  class="cart__price-bucket">
+							В корзину
+					</div>
+					
+					<div class="cart__price-counter display-none">
+							<div class="cart-moreless">
+									<div class="cart__price-minus" data-cart-btnMinus="btnMinus" onclick="delCounter(${cart.id})" >-
+									</div>
+									<div class="cart__price-quantity" id="${cart.id}">0</div>
+									<div class="cart__price-plus" data-cart-btnPlus="btnPlus" onclick="addCounter(${cart.id})">+</div>
+							</div>
+					</div>
+			</div>
+		</div>`
+	cartMenu.innerHTML += cartaddeds
 
+})
+
+
+
+function addCartItem (cart) {
 	//Событие при клике на "В корзину"
-	cartButton[index].addEventListener('click', () => {
+		//Если карточка уже есть в массиве, то просто изменить ее количество
 		
-		//Если карточка уже есть в массиве, то просто изменить ее количество(counter)
-		let findCartId = basket.find(product => product.id === cart.id)?.id    // ???
+		let findCartId = basket.find(product => product.id === cart)?.id    // ???
+		console.log(findCartId)
 		if (findCartId) {
-			let findIndexProduct = basket.findIndex((product) => product.id === findCartId)  // ???
+			let findIndexProduct = basket.findIndex(product => product.id === findCartId)  // ???
 			basket[findIndexProduct].counter = basket[findIndexProduct].counter + 1
 
 		}
 		//Если не найдена то пуш в корзину карточку и  задаем ее количество
-		else{
-			basket.push({ ...cart, counter: 1 })
+		else {
+				basket.push({...listrolls[Number(cart - 1)] , counter: 1 })
+				
+			
 		}
 
-
-		
 		//Добавляем элемент в корзину
 		renderBasket()
 		//Изменяем сумма заказа в корзине
@@ -160,12 +143,8 @@ listrolls.map((cart, index) => {
 		//Обновляем количество продуктов в корзине
 		ChangeQuantity()
 
-	})
-
-
-
-
-})
+	
+}
 
 
 //Функция добавление карточки в корзину 
@@ -200,9 +179,9 @@ function renderBasket() {
 		</div>`
 
 		cartwrapper.insertAdjacentHTML("beforeend", cartaddeds)
-		
+
 		// console.log(product)
-	showCounter(product.id)
+		// showCounter(product.id)
 	})
 }
 
@@ -217,12 +196,11 @@ function changeSumOfShop() {
 	let priceitem = document.querySelectorAll(".cap__bucket-price")
 	let massiv1 = [...priceitem].map(price => {
 		let findIndexProduct = basket.findIndex((product) => product.id === Number(price.parentElement.parentElement.parentElement.id))
-		return Number(price.innerHTML) * basket[findIndexProduct].counter 
-		// console.log(Number(price.innerHTML) * basket[findIndexProduct].counter)
-		
+		return Number(price.innerHTML) * basket[findIndexProduct].counter
+
 
 	})
-	
+
 	return sumOfPrices.innerHTML = [...massiv1].reduce((total, item) => total + Number(item), 0)
 }
 //Фунция изменения количества продуктов в корзине
@@ -245,7 +223,7 @@ function addCounter(idProduct) {
 // Функция уменьшения counter в корзине
 function delCounter(idProduct) {
 	let findIndexProduct = basket.findIndex((product) => product.id === Number(idProduct))
-	
+
 	//Если количество равно 1 то удалить объект из корзины
 	if (basket[findIndexProduct].counter == 1) {   // ???
 		//Удалем элемент
@@ -256,9 +234,9 @@ function delCounter(idProduct) {
 	}
 	//Если объектов в корзине стало 0 то скрываем корзину
 	const bucketBtn = document.querySelector(".cap__bucket")
-	if(basket.length >0){
+	if (basket.length > 0) {
 		console.log("В корзине больше 0 элементов")
-	}else {
+	} else {
 		bucketBtn.classList.add("display-none")
 	}
 	//обновляем карточку в корзине
@@ -270,13 +248,13 @@ function delCounter(idProduct) {
 
 }
 //Функция удаления карточки по нажатию на мусорку
-function delProdClickTrash(idProduct){
+function delProdClickTrash(idProduct) {
 	let findIndexProduct = basket.findIndex((product) => product.id === Number(idProduct))
 	basket.splice(findIndexProduct, 1)
 
 	//Если объектов в корзине стало 0 то скрываем корзину
 	const bucketBtn = document.querySelector(".cap__bucket")
-	if(basket.length <=0) {
+	if (basket.length <= 0) {
 		bucketBtn.classList.add("display-none")
 	}
 
@@ -288,23 +266,23 @@ function delProdClickTrash(idProduct){
 	ChangeQuantity()
 }
 //Функция показа корзины
-function showBucket(){
+function showBucket() {
 	const bucketBtn = document.querySelector(".cap__bucket")
 	const quantityItem = document.querySelector(".cap__right-bucket-text2")
 	const bodyJs = document.querySelector("body")
 
 	//Если 0 элементов то не открвать корзину
-		if (quantityItem.innerHTML == 0  ){
-			bucketBtn.classList.add("display-none")
-		}
-		else{
-			bucketBtn.classList.toggle("display-none")
-			bodyJs.classList.toggle("overflow-hidden")
-		}
-	
+	if (quantityItem.innerHTML == 0) {
+		bucketBtn.classList.add("display-none")
+	}
+	else {
+		bucketBtn.classList.toggle("display-none")
+		bodyJs.classList.toggle("overflow-hidden")
+	}
+
 }
 // click gambit to up page 
-function pageUp(){
+function pageUp() {
 	window.scrollTo({
 		top: 0,
 		left: 0,
@@ -312,10 +290,11 @@ function pageUp(){
 	})
 }
 //Функция показа counter для увелечения продуктов на карточке
-function showCounter(idProduct){
-	let hhh = document.querySelectorAll(".cart__price-counter")
-	cartButton[idProduct - 1].classList.add("display-hidden")
-	hhh[idProduct -1].classList.remove("display-none")
-	
-}
+// function showCounter(idProduct){
+// 	let hhh = document.querySelectorAll(".cart__price-counter")
+// 	const  cartButton = document.querySelectorAll('.cart__price-bucket')
+// 	console.log(cartButton)
+// 	cartButton[idProduct - 1].classList.add("display-hidden")
+// 	hhh[idProduct -1].classList.remove("display-none")
+// }
 
