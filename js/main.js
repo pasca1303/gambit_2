@@ -1,8 +1,8 @@
 
-//Переменная список продуктов куда мы добавляем карточки 
+//Переменная куда мы добавляем карточки 
 const cartMenu = document.querySelector(".menu__carts")
 
-//Переменная корзина куда мы добавляем карточки
+//Переменная корзина 
 const cartwrapper = document.querySelector(".cap__bucket-items-inside-wrapper")
 
 
@@ -85,8 +85,9 @@ let listrolls = [
 	}
 ]
 
-// Добавление инфы в карточки на странице и событие по кнопке на добавление элемента в корзину
+// Добавление карточек на страницу 
 listrolls.forEach((cart, index) => {
+	//html код карточки
 	let cartaddeds = `<div id="${cart.id}"  class="cart">
 			<div class="cart__img">
 					<img src="${cart.img}" alt="">
@@ -98,32 +99,30 @@ listrolls.forEach((cart, index) => {
 					<div  class="cart__price-number">
 						${cart.price}
 					</div>
-					<div id="${cart.id}" onclick="addCartItem(${cart.id})"  class="cart__price-bucket">
+					<div id="${cart.id}" onclick="addCartItem(${cart.id}); showCounter(${cart.id});"  class="cart__price-bucket">
 							В корзину
 					</div>
 					
 					<div class="cart__price-counter display-none">
 							<div class="cart-moreless">
-									<div class="cart__price-minus" data-cart-btnMinus="btnMinus" onclick="delCounter(${cart.id})" >-
+									<div class="cart__price-minus"  onclick="delCounter(${cart.id})" >-
 									</div>
-									<div class="cart__price-quantity" id="${cart.id}">0</div>
-									<div class="cart__price-plus" data-cart-btnPlus="btnPlus" onclick="addCounter(${cart.id})">+</div>
+									<div class="cart__price-quantity" id="${cart.id}">1</div>
+									<div class="cart__price-plus" onclick="addCounter(${cart.id})">+</div>
 							</div>
 					</div>
 			</div>
 		</div>`
+	//добавление карточки на страницу
 	cartMenu.innerHTML += cartaddeds
 
 })
 
-
-
+//добавление кликнутой карточки в массив basket
 function addCartItem (cart) {
-	//Событие при клике на "В корзину"
 		//Если карточка уже есть в массиве, то просто изменить ее количество
-		
 		let findCartId = basket.find(product => product.id === cart)?.id    // ???
-		console.log(findCartId)
+		
 		if (findCartId) {
 			let findIndexProduct = basket.findIndex(product => product.id === findCartId)  // ???
 			basket[findIndexProduct].counter = basket[findIndexProduct].counter + 1
@@ -142,12 +141,11 @@ function addCartItem (cart) {
 		changeSumOfShop()
 		//Обновляем количество продуктов в корзине
 		ChangeQuantity()
-
+		//Показ счетчика карточки
+		
 	
 }
-
-
-//Функция добавление карточки в корзину 
+// добавление карточки в корзину из массива basket
 //и в html коде у кнопок "+"  и "-" стоят функции действий с количеством товара в корзине
 function renderBasket() {
 	cartwrapper.innerHTML = ""
@@ -186,10 +184,6 @@ function renderBasket() {
 }
 
 
-
-
-
-
 //Функция изменения итоговой суммы
 function changeSumOfShop() {
 	let sumOfPrices = document.querySelector(".cap__bucket-items-sum")
@@ -197,8 +191,6 @@ function changeSumOfShop() {
 	let massiv1 = [...priceitem].map(price => {
 		let findIndexProduct = basket.findIndex((product) => product.id === Number(price.parentElement.parentElement.parentElement.id))
 		return Number(price.innerHTML) * basket[findIndexProduct].counter
-
-
 	})
 
 	return sumOfPrices.innerHTML = [...massiv1].reduce((total, item) => total + Number(item), 0)
@@ -212,8 +204,10 @@ function ChangeQuantity() {
 // Функция Увеличивания counter в корзине
 function addCounter(idProduct) {
 	let findIndexProduct = basket.findIndex((product) => product.id === Number(idProduct))   //  ???
+	let cartCounterQuantity = document.querySelectorAll(".cart__price-quantity")
 	//Увеличиваем counter на 1
 	basket[findIndexProduct].counter = basket[findIndexProduct].counter + 1
+	cartCounterQuantity[idProduct - 1].innerHTML = Number(cartCounterQuantity[idProduct -1].innerHTML) + 1
 	//обновляем карточку в корзине
 	renderBasket()
 	//Изменяем сумма заказа в корзине
@@ -223,14 +217,21 @@ function addCounter(idProduct) {
 // Функция уменьшения counter в корзине
 function delCounter(idProduct) {
 	let findIndexProduct = basket.findIndex((product) => product.id === Number(idProduct))
+	const  cartButton = document.querySelectorAll('.cart__price-bucket')
+	let cartCounter = document.querySelectorAll(".cart__price-counter")
+	let cartCounterQuantity = document.querySelectorAll(".cart__price-quantity")
 
 	//Если количество равно 1 то удалить объект из корзины
 	if (basket[findIndexProduct].counter == 1) {   // ???
+		//Скрываем counter на странице если элементов 0 в корзине
+		cartButton[Number(idProduct -1)].classList.remove("display-hidden")
+		cartCounter[Number(idProduct -1)].classList.add("display-none")
 		//Удалем элемент
 		basket.splice(findIndexProduct, 1)
 	} else {
 		//Уменьшаем counter на один
 		basket[findIndexProduct].counter = basket[findIndexProduct].counter - 1
+		cartCounterQuantity[idProduct -1].innerHTML = Number(cartCounterQuantity[idProduct -1].innerHTML) - 1
 	}
 	//Если объектов в корзине стало 0 то скрываем корзину
 	const bucketBtn = document.querySelector(".cap__bucket")
@@ -239,6 +240,7 @@ function delCounter(idProduct) {
 	} else {
 		bucketBtn.classList.add("display-none")
 	}
+
 	//обновляем карточку в корзине
 	renderBasket()
 	//Изменяем сумма заказа в корзине
@@ -246,10 +248,20 @@ function delCounter(idProduct) {
 	//Обновление количество продуктов в корзине
 	ChangeQuantity()
 
+	
 }
 //Функция удаления карточки по нажатию на мусорку
 function delProdClickTrash(idProduct) {
 	let findIndexProduct = basket.findIndex((product) => product.id === Number(idProduct))
+	const  cartButton = document.querySelectorAll('.cart__price-bucket')
+	let cartCounter = document.querySelectorAll(".cart__price-counter")
+
+
+	//Скрываем counter на странице если удаляем его из корзины
+	cartButton[Number(idProduct -1)].classList.remove("display-hidden")
+	cartCounter[Number(idProduct -1)].classList.add("display-none")
+
+	//Удаляем элемент с корзины
 	basket.splice(findIndexProduct, 1)
 
 	//Если объектов в корзине стало 0 то скрываем корзину
@@ -289,12 +301,24 @@ function pageUp() {
 		behavior: 'smooth'
 	})
 }
-//Функция показа counter для увелечения продуктов на карточке
-// function showCounter(idProduct){
-// 	let hhh = document.querySelectorAll(".cart__price-counter")
-// 	const  cartButton = document.querySelectorAll('.cart__price-bucket')
-// 	console.log(cartButton)
-// 	cartButton[idProduct - 1].classList.add("display-hidden")
-// 	hhh[idProduct -1].classList.remove("display-none")
-// }
+// Функция показа counter на странице при клике 
+function showCounter(idProduct){
+	let cartCounter = document.querySelectorAll(".cart__price-counter")
+	const  cartButton = document.querySelectorAll('.cart__price-bucket')
+	
+	// скрываем кнопку
+	cartButton[Number(idProduct -1)].classList.add("display-hidden")
+	//Показываем counter
+	cartCounter[Number(idProduct -1)].classList.remove("display-none")
+	
+}
+
+function delCounter2(cartId){
+	console.log("hello")
+	// basket[cartId].counter -1;
+	console.log(basket)
+
+}
+
+
 
