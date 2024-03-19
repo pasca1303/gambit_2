@@ -547,6 +547,7 @@ body {
 .cart__price-number {
 	font-weight: 700;
 	font-size: 18px;
+	padding-bottom: 17px;
 }
 
 .cart__price-bucket {
@@ -558,9 +559,6 @@ body {
 	padding: 8px 12px;
 	color: white;
 	border-radius: 8px;
-	position: absolute;
-	right: 12px;
-	bottom: 12px;
 
 	&:hover {
 		cursor: pointer;

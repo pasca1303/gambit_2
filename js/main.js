@@ -9,81 +9,32 @@ const cartwrapper = document.querySelector(".cap__bucket-items-inside-wrapper")
 // Массив которые пушится в корзину
 let basket = []
 
+class Cart {
+	constructor (id,img,title,price){
+		this.id = id
+		this.img = img
+		this.title = title
+		this.price = price
+	}
+
+}
 // массив  объекты которого мы добавляем на страницу
 let listrolls = [
-	{
-		id: 1,
-		img: "img/rolls/калифорния маки Запеченный.png",
-		title: "Ролл Калифорния Маки Запеченный",
-		price: 1375,
-	},
-	{
-		id: 2,
-		img: "img/rolls/Авокадо-маки Ролл.png",
-		title: "Авокадо-маки Ролл",
-		price: 135,
-	},
-	{
-		id: 3,
-		img: "img/rolls/Акаи Ролл.png",
-		title: "Акаи ролл",
-		price: 397,
-	},
-	{
-		id: 4,
-		img: "img/rolls/Кагувасэ Ролл.png",
-		title: "Ролл Кагувасэ",
-		price: 363,
-	},
-	{
-		id: 5,
-		img: "img/rolls/Дракон Ролл.png",
-		title: "Дракон Ролл",
-		price: 604,
-	},
-	{
-		id: 6,
-		img: "img/rolls/цезарь эби.png",
-		title: "Ролл цезарь эби",
-		price: 364,
-	},
-	{
-		id: 7,
-		img: "img/rolls/Кани хотто-маки Ролл.png",
-		title: "Ролл Кани хотто-маки",
-		price: 472,
-	},
-	{
-		id: 8,
-		img: "img/rolls/Ойси ролл.png",
-		title: "Ойси ролл",
-		price: 399,
-	},
-	{
-		id: 9,
-		img: "img/rolls/Кани спайси Гункан.png",
-		title: "Ролл Кани спайси-гункан",
-		price: 199,
-	},
-	{
-		id: 10,
-		img: "img/rolls/Ролл Калифорния Хот.png",
-		title: "Ролл Калифорния Хот",
-		price: 362,
-	},
-	{
-		id: 11,
-		img: "img/rolls/Ролл_Итальянский_запеченый_сырный.png",
-		title: "Ролл Итальянский запеченый сырный",
-		price: 330,
-	},
-	{
-		id: 12,
-		img: "img/rolls/Боул с семгой.png",
-		title: "Боул с семгой",
-		price: 419,
-	}
+	new Cart(1,"img/rolls/калифорния маки Запеченный.png", "Ролл Калифорния Маки Запеченный",1375),
+	new Cart(2,"img/rolls/Авокадо-маки Ролл.png", "Авокадо-маки Ролл",1375),
+	new Cart(3,"img/rolls/Акаи Ролл.png","Акаи ролл",397),
+	new Cart(4,"img/rolls/Кагувасэ Ролл.png","Ролл Кагувасэ",363),
+	new Cart(5,"img/rolls/Дракон Ролл.png","Дракон Ролл",604),
+	new Cart(6,"img/rolls/цезарь эби.png","Ролл цезарь эби",364),
+	new Cart(7,"img/rolls/Кани хотто-маки Ролл.png","Ролл Кани хотто-маки",472),
+	new Cart(8,"img/rolls/Ойси ролл.png","Ойси ролл",399),
+	new Cart(9,"img/rolls/Кани спайси Гункан.png","Ролл Кани спайси-гункан",199),
+	new Cart(10,"img/rolls/Ролл Калифорния Хот.png","Ролл Калифорния Хот",362),
+	new Cart(11,"img/rolls/Ролл_Итальянский_запеченый_сырный.png","Ролл Итальянский запеченый сырный",330),
+	new Cart(12,"img/rolls/Боул с семгой.png","Боул с семгой",419),
+
 ]
+
 
 // Добавление карточек на страницу 
 listrolls.forEach((cart, index) => {
